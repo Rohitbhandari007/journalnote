@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views import View
 from django.views.generic.edit import CreateView
 from .models import Journal, Post
@@ -15,11 +16,12 @@ from .filters import OrderFilter
 #     context_object_name = 'posts'
 #     ordering = ['-date_created']
 
-# class CheckPerm(View):
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.id == 2:
-#             return super().dispatch(request, *args, **kwargs)
-#         raise Http404
+class CheckPerm(View):
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.id == 1:
+            return super().dispatch(request, *args, **kwargs)
+        raise Http404
 
 
 class PostListView(View):
