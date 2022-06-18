@@ -16,17 +16,8 @@ from .filters import OrderFilter
 #     context_object_name = 'posts'
 #     ordering = ['-date_created']
 
-class CheckPerm(View):
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.id == 1:
-            return super().dispatch(request, *args, **kwargs)
-        raise Http404
-
-
-class PostListView(View):
+class PostListView(LoginRequiredMixin, View):
     def get(self, request):
-        print(request.user.id)
         posts = request.user.my_post.all()
         context = {"posts": posts}
         return render(request, 'core/home.html', context)
