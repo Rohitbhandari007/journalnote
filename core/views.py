@@ -1,11 +1,6 @@
 from turtle import title
-from warnings import filters
-from django.http import Http404
 from django.views import View
 from django.views.generic.edit import CreateView
-from django.views.generic.detail import DetailView
-from django.views.generic import ListView
-from matplotlib.pyplot import get
 from .models import Journal, Post
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login
@@ -13,7 +8,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import OrderFilter
-from django.contrib import messages
 
 
 # class PostListView(LoginRequiredMixin, ListView):
