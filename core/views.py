@@ -8,13 +8,14 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import OrderFilter
-
+from django.contrib import messages
 
 # class PostListView(LoginRequiredMixin, ListView):
 #     model = Post
 #     template_name = 'core/home.html'  # <app>/<model>_<viewtype>.html
 #     context_object_name = 'posts'
 #     ordering = ['-date_created']
+
 
 class PostListView(LoginRequiredMixin, View):
     def get(self, request):
@@ -56,12 +57,18 @@ def register(request):
 
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST)
+        print(request.POST.get('password1'))
+
         if form.is_valid():
             user = form.save()
             print('User Created')
 
             login(request, user)
             return redirect(reverse("home"))
+        else:
+            #messages.error(request, f'{form.error_messages}')
+
+            return render(request, 'core/register.html', {'form': form})
 
 
 def searchbar(request):

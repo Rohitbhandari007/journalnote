@@ -1,0 +1,19 @@
+.notedetail {
+  padding: 5%;
+  border: none;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #193434;
+}
+.notedetail .title {
+  font-weight: 600;
+  margin-top: 2%;
+}
+.notedetail .date {
+  font-weight: 800;
+}
+.notedetail .details {
+  margin-top: 5%;
+}

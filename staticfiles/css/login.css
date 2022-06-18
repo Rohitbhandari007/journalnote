@@ -1,0 +1,32 @@
+.loginpls button {
+  background-color: #262a33;
+  outline: none;
+  border: none;
+  width: 10%;
+  cursor: pointer;
+  padding: 1%;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 1%;
+}
+.loginpls input {
+  border: none;
+  border-bottom: 1px solid rgb(88, 86, 86);
+  margin-top: 1%;
+  background-color: rgb(201, 192, 192);
+  width: 40%;
+  padding: 1%;
+  border-radius: 10px;
+}
+.extra {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+.extra p {
+  margin-top: 1%;
+}
+.btn {
+  cursor: pointer;
+}

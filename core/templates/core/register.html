@@ -1,11 +1,27 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
+
 <div class="register">
+
+    
     <h2>Register</h2>
 
 <form method="post">
     {% csrf_token %}
+
+    {% if form.errors %}
+                <div id="error" class="errorlist">
+                    {% for field in form %} 
+                    {% for error in field.errors %}
+                    <!-- Output error text message only -->
+                    {{error}}
+                    <a id="cross" class="float-right mx-4"><i class="fa fa-times"></i></a>
+                    {% endfor %} {% endfor %}
+                    </div>
+                    {% endif %}
+
     {{ form.as_p }}
     <input class="btn "type="submit" value="Register">
 </form>
