@@ -1,23 +1,40 @@
 from turtle import title
 from warnings import filters
+from django.http import Http404
+from django.views import View
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
+from matplotlib.pyplot import get
 from .models import Journal, Post
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import OrderFilter
 from django.contrib import messages
 
 
-class PostListView(LoginRequiredMixin, ListView):
-    model = Post
-    template_name = 'core/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    ordering = ['-date_created']
+# class PostListView(LoginRequiredMixin, ListView):
+#     model = Post
+#     template_name = 'core/home.html'  # <app>/<model>_<viewtype>.html
+#     context_object_name = 'posts'
+#     ordering = ['-date_created']
+
+# class CheckPerm(View):
+#     def dispatch(self, request, *args, **kwargs):
+#         if request.user.id == 2:
+#             return super().dispatch(request, *args, **kwargs)
+#         raise Http404
+
+
+class PostListView(View):
+    def get(self, request):
+        print(request.user.id)
+        posts = request.user.my_post.all()
+        context = {"posts": posts}
+        return render(request, 'core/home.html', context)
 
 
 class CreatePost(LoginRequiredMixin, CreateView):
@@ -34,10 +51,14 @@ class CreatePost(LoginRequiredMixin, CreateView):
     template_name = 'core/journal_form.html'
 
 
-class PostDetails(LoginRequiredMixin, DetailView):
-    model = Post
-    template_name = 'core/journal_detail.html'
-    context_object_name = 'post'
+class PostDetails(View):
+    def get(self, request, id):
+        post = get_object_or_404(Post, id=id)
+        if post.author == request.user:
+            context = {"post": post, "id": id}
+            return render(request, 'core/journal_detail.html', context)
+        else:
+            raise Http404
 
 
 def register(request):
@@ -66,7 +87,7 @@ def searchbar(request):
 
 def adsearch(request):
 
-    posts = Post.objects.all()
+    posts = Post.objects.filter(author=request.user)
     filters = OrderFilter(request.GET, queryset=posts)
     posts = filters.qs
     title = request.GET.get('title')
