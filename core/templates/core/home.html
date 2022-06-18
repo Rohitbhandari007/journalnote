@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>Hi  {{ user.username }}! </h1>
+<p class="logoutbtn"><a href="{% url 'logout' %}">Log Out</a></p>
+
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+        <div class="container">
+            <div class="container_two">
+                <a href="{% url 'create_post' %}">
+                    <div class="create">Create new journal</div>
+                   </a>
+                <div class="search">
+                    <form action="{% url 'search' %}" style="display:flex; flex-direction:row">
+                        <input type="search" name="search" id="" placeholder="enter title to search..">
+                        <button type="submit"style="margin-left:1% ; width: 20%;">Search</button>
+                    </form>
+                </div>
+                <div class="date_search">
+                    <a href="{% url 'adsearch' %}">Advanced Search</a>
+    
+                </div>
+            </div>    
+        
+        <div class="line"></div>    
+
+        </div>
+            <div class="container_one">
+                {% for post in posts %}
+                <a href="{% url 'detail' post.id %}">
+                {% if user.id == post.author.id %}
+                <div class="note">
+                    <div class="title"> {{ post.title }} </div>
+                    <div class="date">  {{ post.date_created|date:"M d, Y" }}</div>
+                  </div>
+                    {% else %}
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+            
+    </div>
+{% endblock content %}
+ 

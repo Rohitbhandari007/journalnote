@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block content %}
+<a href="{% url 'home' %}" style="margin-bottom:2% ;">Go back to home</a>
+
+<form method="POST" class="journalss" id ="journalss">
+    <p>Give a title and write how your day went..</p>
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Enter a Title">
+    <textarea name="details" id="" placeholder="Enter the description here"></textarea>
+
+    <input type="submit" value="Submit" class="btn">
+    
+</form>
+
+{% endblock content %}

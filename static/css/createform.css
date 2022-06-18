@@ -1,0 +1,43 @@
+.journalss {
+  display: flex;
+  flex-direction: column;
+}
+.journalss input {
+  border: none;
+  border-bottom: 1px solid rgb(88, 86, 86);
+  margin-top: 1%;
+  background-color: rgb(201, 192, 192);
+  width: 40%;
+  padding: 1%;
+  border-radius: 10px;
+}
+.journalss textarea {
+  border: none;
+  border-bottom: 1px solid gray;
+  margin-top: 1%;
+  width: 100%;
+  height: 250px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: rgb(201, 192, 192);
+  font-size: 12px;
+  overflow: auto;
+  resize: none;
+}
+.journalss .btn {
+  background-color: #262a33;
+  outline: none;
+  border: none;
+  width: 10%;
+  align-self: center;
+  cursor: pointer;
+  padding: 1%;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+.journalss .btn:hover {
+  background-color: #23262e;
+}
