@@ -1,4 +1,3 @@
-from turtle import title
 from django.views import View
 from django.views.generic.edit import CreateView
 from .models import Journal, Post
