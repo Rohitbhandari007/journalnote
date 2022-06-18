@@ -1,18 +1,13 @@
 {% extends "core/base.html" %}
 {% block content %}
-{% if user.id == post.author.id %}
 
 <div class="notedetail">
-
     <div class="date">  {{post.date_created}}</div>
     <div class="title"> " {{ post.title }} "</div>
     <div class="details">
         {{ post.details }}</div>
   </div>
-  {% else %}
 
-  <h1>You are unathorized to see this shit</h1>
 
-  {% endif %}
 
 {% endblock content %}

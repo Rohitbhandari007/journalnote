@@ -7,7 +7,8 @@ urlpatterns = [
     path('', PostListView.as_view(), name='home'),
     path('create/', CreatePost.as_view(), name='create_post'),
     path('register/', register, name='register'),
-    path('<int:pk>/', PostDetails.as_view(), name='detail'),
+    path('<int:id>/',
+         PostDetails.as_view(), name='detail'),
     path('search/', searchbar, name='search'),
     path('adsearch/', adsearch, name='adsearch'),
 
